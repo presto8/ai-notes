@@ -27,6 +27,7 @@ fixed structure.
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
 - [Models I use](#models-i-use)
+- [Using GitHub to manage an agentic workflow](#using-github-to-manage-an-agentic-workflow)
 - [Todo](#todo)
 
 ## Why I prefer CLI/TUI over desktop apps
@@ -308,6 +309,14 @@ The pattern in general: pick the cheapest/fastest model that's still reliable
 for the task, and only reach for a heavier model when the task is genuinely
 hard (planning, architecture decisions, ambiguous problems) rather than just
 long.
+
+## Using GitHub to manage an agentic workflow
+
+TODO: notes on how I use GitHub itself as guardrails around agentic coding
+work — protected `main` branch, all changes go through a pull request (even
+my own solo work), required linear history / rebase merges, branch rulesets,
+and anything else that keeps an agent from pushing straight to `main` or
+rewriting history it should not touch.
 
 ## License
 
