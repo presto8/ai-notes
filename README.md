@@ -226,8 +226,7 @@ Most of my agent CLIs and editor integrations that support a custom
 OpenAI-compatible base URL can be pointed at OpenRouter the same way they'd
 be pointed at any other compatible endpoint — set the base URL to
 `https://openrouter.ai/api/v1`, set the API key, and pick a model from
-OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1` or
-`groq/compound`).
+OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1`).
 
 ### Fees when adding funds
 
@@ -300,8 +299,10 @@ model and reserve the others for specific situations:
 - **DeepSeek 4.1** — via OpenRouter, for specific tasks where I want to
   compare against or use an open-weight model instead of Claude.
 - **GLM 5.3** — via OpenRouter, same category as DeepSeek above.
-- **Groq/Compound** — via OpenRouter (Groq-hosted), when I want very fast
-  inference and the task doesn't need Claude-level reasoning depth.
+- **Groq/Compound** — via Groq's own API directly, not OpenRouter, when I
+  want very fast inference and the task doesn't need Claude-level reasoning
+  depth. Free as far as I've seen — I've never hit a usage limit — and
+  extremely fast.
 
 The pattern in general: pick the cheapest/fastest model that's still reliable
 for the task, and only reach for a heavier model when the task is genuinely
