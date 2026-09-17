@@ -294,8 +294,9 @@ model and reserve the others for specific situations:
 - **Claude Opus** — occasionally, specifically for planning and design work
   where I want deeper reasoning before committing to an approach. Not used
   for routine execution — too slow/expensive for that.
-- **Claude Fable** — rarely, for specific cases where its behavior fits
-  better than Sonnet's.
+- **Claude Fable** — rarely. It costs roughly 4x what Sonnet 5 does, which is
+  hard to justify outside a narrow set of cases where its behavior genuinely
+  fits better than Sonnet's.
 - **DeepSeek 4.1** — via OpenRouter, for specific tasks where I want to
   compare against or use an open-weight model instead of Claude.
 - **GLM 5.3** — via OpenRouter, same category as DeepSeek above.
