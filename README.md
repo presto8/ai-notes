@@ -258,6 +258,14 @@ be pointed at any other compatible endpoint — set the base URL to
 OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1` or
 `groq/compound`).
 
+### Fees when adding funds
+
+OpenRouter charges a processing fee (around 5%) on top of every deposit, with
+a minimum charge — so small top-ups pay a disproportionately high effective
+rate. Add at least **$15** at a time to keep the fee from eating an outsized
+share of the deposit. I pay with a 2% cashback rewards card, which brings my
+net effective fee down to roughly 3%.
+
 ## Neovim with Copilot
 
 For editor-integrated pair programming, ghost-text style inline suggestions,
