@@ -18,4 +18,8 @@ happens.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Copyright (C) 2026 Preston Hunt
+
+Licensed under the GNU General Public License v3.0 — see [LICENSE](LICENSE).
+Anyone who distributes this work or a modified version of it must make the
+corresponding source available under the same license.
