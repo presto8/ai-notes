@@ -31,6 +31,7 @@ happens.
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
 - [Models I use](#models-i-use)
+- [Todo](#todo)
 
 ## Why I prefer CLI/TUI over desktop apps
 
@@ -388,3 +389,14 @@ Copyright (C) 2026 Preston Hunt
 Licensed under the GNU General Public License v3.0 — see [LICENSE](LICENSE).
 Anyone who distributes this work or a modified version of it must make the
 corresponding source available under the same license.
+
+## Todo
+
+Tools and ideas I want to look into, but have not tried yet:
+
+- [seshagy](https://github.com/lmilojevicc/seshagy). An agent-aware
+  terminal dashboard that shows your project directories, active
+  multiplexer sessions, and terminal-based coding agents in one view. It
+  has native support for both tmux and Herdr, and under Herdr it uses
+  Herdr's own agent-state detection directly, so it lines up with the
+  Herdr setup described above.
