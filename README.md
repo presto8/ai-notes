@@ -26,6 +26,7 @@ happens.
   - [Claude Code](#claude-code)
   - [Codex](#codex)
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
+- [Skills I use](#skills-i-use)
 - [gptel.el in Emacs](#gptelel-in-emacs)
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
@@ -197,6 +198,37 @@ Sources besides a bare `owner/repo` shorthand also work: full GitHub/GitLab
 URLs, a direct path to a skill subdirectory within a repo, any git URL
 (including private repos, using whatever auth is already configured for that
 remote), or a local path.
+
+## Skills I use
+
+A couple of skills I've installed via `npx skills add` and use regularly:
+
+- **[SimpleEnglish](https://github.com/AminBlg/SimpleEnglish)** — forces the
+  agent to write in ASD-STE100 Simplified Technical English, the controlled
+  language standard aerospace has used since 1983 to make instructions hard
+  to misread (short sentences, active voice, one instruction per sentence, no
+  hedging modals). Useful whenever I want an agent's writing — docs, replies,
+  commit messages — to read as plain and unambiguous rather than defaulting
+  to typical LLM prose. Install:
+
+  ```sh
+  npx skills add AminBlg/SimpleEnglish
+  ```
+
+- **[cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)**
+  — turns an agent into a structured security auditor. It runs a six-phase
+  pipeline (recon → parallel vulnerability hunting → adversarial validation
+  that tries to disprove each finding → human-readable report → structured
+  JSON output → independent fresh-agent verification of every claim against
+  the actual source). This is the same skill that seeded Cloudflare's own
+  internal vulnerability-discovery harness. Install:
+
+  ```sh
+  npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
+  ```
+
+  Then just ask the agent to "security audit this codebase" or "find security
+  vulnerabilities in ./src" and it activates automatically.
 
 ## gptel.el in Emacs
 
