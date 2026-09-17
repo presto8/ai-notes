@@ -122,12 +122,13 @@ TODO: notes on OpenCode setup and workflow.
 
 ### Claude Code
 
-TODO: notes on Claude Code setup, including the Foundry-backed BYOK
-configuration used at work instead of a standard claude.ai account.
+I use the **Claude Code CLI**. TODO: notes on setup, including the
+Foundry-backed BYOK configuration used at work instead of a standard
+claude.ai account.
 
 ### Codex
 
-TODO: notes on Codex CLI setup and workflow.
+I use the **Codex CLI**. TODO: notes on setup and workflow.
 
 ## skills.sh and npx skills
 
