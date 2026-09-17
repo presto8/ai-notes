@@ -1,16 +1,16 @@
 # ai-notes
 
-Notes on my personal AI workflow — tools, configurations, and lessons
-learned, shared in case they're useful to others. Most of what I learn about
-working with AI tools doesn't fit neatly into a blog post or a single
-polished writeup, so this is a place to capture it as it happens.
+Notes on my AI workflow: tools, configurations, and lessons learned. I share
+them here in case they help others. Most of what I learn about AI tools does
+not fit into a blog post or a single polished article, so this repository is
+where I record each lesson as it happens.
 
-## What's here
+## What is here
 
-This repo is a running set of notes on how I use AI day to day: agent setups,
-CLI tools, configuration tricks, prompts that work well, and things I learned
-the hard way. It's informal and grows organically rather than following a
-fixed structure.
+This repository is a running set of notes on how I use AI each day: agent
+setups, CLI tools, configuration tricks, prompts that work well, and lessons I
+learned the hard way. The notes are informal. The repository grows over time
+and does not follow a fixed structure.
 
 ## Contents
 
@@ -32,29 +32,31 @@ fixed structure.
 
 ## Why I prefer CLI/TUI over desktop apps
 
-I default to terminal and TUI tools over traditional GUI desktop apps
-wherever a good option exists — faster startup, lighter resource use,
-remote/SSH-friendly, and keyboard-driven rather than mouse-driven. See
-[docs/cli-vs-gui.md](docs/cli-vs-gui.md) for the full rundown, including the
-keyboard-vs-mouse question.
+I use terminal and TUI (text user interface, a full-screen program you control
+from the keyboard) tools instead of desktop apps whenever a good option
+exists. Terminal tools start faster, use fewer resources, work over SSH, and
+let me stay on the keyboard instead of the mouse. Read
+[docs/cli-vs-gui.md](docs/cli-vs-gui.md) for the full explanation, including
+the keyboard-versus-mouse question.
 
 ## Herdr as an AI agent multiplexer
 
-[Herdr](https://herdr.dev) is a terminal multiplexer built specifically around
-running multiple AI coding agents at once, rather than being a general-purpose
-tmux replacement with agents bolted on. I use it as my daily driver for
-running several agent sessions (Claude Code, Codex, OpenCode, Hermes) side by
-side across local and remote (SSH) machines. See [docs/herdr.md](docs/herdr.md)
-for what makes it useful for this job and my config notes.
+[Herdr](https://herdr.dev) is a terminal multiplexer (a program that runs many
+terminal sessions inside one window) built for running many AI coding agents
+at the same time. It is not a general tmux replacement with agent features
+added later. I use it every day to run several agent sessions (Claude Code,
+Codex, OpenCode, Hermes) side by side, on my local machine and on remote
+machines over SSH. Read [docs/herdr.md](docs/herdr.md) for what makes it
+useful for this job and for my configuration notes.
 
 ## Agents I use
 
-Short notes on how each agent CLI fits into the workflow above — all of them
-run inside Herdr panes day to day.
+Short notes on how each agent CLI fits into the workflow above. I run all of
+them inside Herdr panes each day.
 
 ### Hermes
 
-TODO: notes on Hermes Agent setup, skills, and how I use it day to day.
+TODO: notes on Hermes Agent setup, skills, and daily use.
 
 ### OpenCode
 
@@ -62,24 +64,25 @@ TODO: notes on OpenCode setup and workflow.
 
 ### Claude Code
 
-I use the **Claude Code CLI**. TODO: notes on setup, including the
-Foundry-backed BYOK configuration used at work instead of a standard
+I use the Claude Code CLI. TODO: notes on setup, including the Foundry-backed
+BYOK (bring your own key) configuration I use at work instead of a standard
 claude.ai account.
 
 ### Codex
 
-I use the **Codex CLI**. TODO: notes on setup and workflow.
+I use the Codex CLI. TODO: notes on setup and workflow.
 
 ## skills.sh and npx skills
 
-[skills.sh](https://skills.sh) is an open ecosystem/registry for "Agent
-Skills" — portable `SKILL.md`-based procedural knowledge packages that plug
-into most agent CLIs (Claude Code, Codex, OpenCode, Cursor, Hermes, and dozens
-more). The `skills` CLI (run via `npx skills`, no install needed) is the tool
-for discovering, installing, and syncing them.
+[skills.sh](https://skills.sh) is an open registry for Agent Skills. An Agent
+Skill is a portable package of procedural knowledge, defined in a file named
+`SKILL.md`. Most agent CLIs can read these packages, including Claude Code,
+Codex, OpenCode, Cursor, and Hermes. The `skills` CLI runs with `npx skills`
+and needs no separate install. Use it to find, install, and update skill
+packages.
 
-Each supported agent has its own project-level and global directory
-convention that the CLI writes to automatically, e.g.:
+Each supported agent has its own project-level and global directory for
+skills. The CLI writes to the correct directory for you. For example:
 
 | Agent | Project path | Global path |
 |---|---|---|
@@ -121,53 +124,54 @@ npx skills update my-skill  # update one skill
 npx skills init my-skill
 ```
 
-Sources besides a bare `owner/repo` shorthand also work: full GitHub/GitLab
-URLs, a direct path to a skill subdirectory within a repo, any git URL
-(including private repos, using whatever auth is already configured for that
-remote), or a local path.
+You can also install from other sources: a full GitHub or GitLab URL, a direct
+path to a skill subdirectory in a repository, any git URL, or a path on your
+local disk. A private repository works too. The CLI uses the authentication
+that your git client already has for that remote.
 
 ## Skills I use
 
-A couple of skills I've installed via `npx skills add` and use regularly:
+Two skills I installed with `npx skills add` and use often:
 
-- **[SimpleEnglish](https://github.com/AminBlg/SimpleEnglish)** — forces the
-  agent to write in ASD-STE100 Simplified Technical English, the controlled
-  language standard aerospace has used since 1983 to make instructions hard
-  to misread (short sentences, active voice, one instruction per sentence, no
-  hedging modals). Useful whenever I want an agent's writing — docs, replies,
-  commit messages — to read as plain and unambiguous rather than defaulting
-  to typical LLM prose. Install:
+- [SimpleEnglish](https://github.com/AminBlg/SimpleEnglish). This skill makes
+  an agent write in ASD-STE100 Simplified Technical English. This is a
+  controlled language that aerospace has used since 1983 to make instructions
+  hard to misread. The rules include short sentences, active voice, one
+  instruction per sentence, and no hedging words such as "should" or "might".
+  I use it when I want an agent's writing (documents, replies, commit
+  messages) to read as plain and clear instead of typical AI prose. Install:
 
   ```sh
   npx skills add AminBlg/SimpleEnglish
   ```
 
-- **[cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill)**
-  — turns an agent into a structured security auditor. It runs a six-phase
-  pipeline (recon → parallel vulnerability hunting → adversarial validation
-  that tries to disprove each finding → human-readable report → structured
-  JSON output → independent fresh-agent verification of every claim against
-  the actual source). This is the same skill that seeded Cloudflare's own
-  internal vulnerability-discovery harness. Install:
+- [cloudflare/security-audit-skill](https://github.com/cloudflare/security-audit-skill).
+  This skill turns an agent into a security auditor that works in six phases.
+  It maps the codebase, hunts for vulnerabilities with several parallel
+  agents, and tries to disprove each finding with a separate validation agent.
+  It then writes a human-readable report, writes the same findings as
+  structured JSON, and verifies every claim in that JSON against the source
+  code with a fresh agent. Cloudflare used this skill to start its own
+  internal vulnerability-discovery system. Install:
 
   ```sh
   npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
   ```
 
-  Then just ask the agent to "security audit this codebase" or "find security
-  vulnerabilities in ./src" and it activates automatically.
+  After you install it, ask the agent to "security audit this codebase" or
+  "find security vulnerabilities in ./src". The skill activates on its own.
 
 ## gptel.el in Emacs
 
-[gptel](https://github.com/karthink/gptel) is the Emacs package I use for
-in-editor LLM chat and completion — a lightweight universal client rather than
-a heavyweight IDE-agent integration. It supports many backends (OpenAI,
-Anthropic, Gemini, Ollama, Bedrock, and more) through a common interface, so
-switching models is a config-level concern, not a workflow change.
+[gptel](https://github.com/karthink/gptel) is the Emacs package I use for LLM
+chat and text completion inside the editor. It is a light client, not a full
+IDE-agent integration. It supports many backends (OpenAI, Anthropic, Gemini,
+Ollama, Bedrock, and more) through one interface. Because of this, a model
+switch is a configuration change, not a change in how you work.
 
-The useful trick is `gptel-make-anthropic`, which lets you point gptel at any
-Anthropic-Messages-API-compatible endpoint instead of just `api.anthropic.com`
-— handy for a company-hosted Foundry/gateway endpoint:
+The function `gptel-make-anthropic` lets you point gptel at any endpoint that
+speaks the Anthropic Messages API, not only `api.anthropic.com`. This is
+useful for a company-hosted gateway endpoint:
 
 ```elisp
 (defun use-anthropic ()
@@ -191,57 +195,58 @@ Anthropic-Messages-API-compatible endpoint instead of just `api.anthropic.com`
 
 Notes:
 
-- Pull the API key from an environment variable (or a proper secrets store)
-  rather than hardcoding it in `init.el` — especially if `init.el` ever ends
-  up in a dotfiles repo. `:key` and the values inside `:header` both accept a
-  function, so a lambda reading `getenv` works cleanly.
-- `:models` is a list of model IDs the endpoint actually serves; gptel uses
-  this to populate its model-switching UI (`gptel-menu` / `M-x gptel-send`
-  transient), so it needs to match what your gateway calls them, not
-  necessarily Anthropic's public model names.
-- Package installed via `elpa`/`use-package` as normal; no special setup
-  beyond `:ensure t` and the backend config above.
+- Read the API key from an environment variable, or from a secrets store,
+  instead of writing it directly in `init.el`. This matters if `init.el` ever
+  ends up in a dotfiles repository. Both `:key` and the values inside
+  `:header` accept a function, so a function that reads `getenv` works here.
+- `:models` lists the model IDs that the endpoint serves. gptel uses this list
+  to build its model-switching menu (`gptel-menu`, or the transient menu from
+  `M-x gptel-send`). The list must match the names your gateway uses. These
+  are not always the public Anthropic model names.
+- Install the package through `elpa` and `use-package` as normal. It needs no
+  setup beyond `:ensure t` and the backend configuration shown above.
 
 ## OpenRouter
 
-[OpenRouter](https://openrouter.ai) is a unified API/router that sits in
-front of dozens of model providers (Anthropic, OpenAI, Google, Meta, DeepSeek,
-Mistral, Groq-hosted models, and many open-weight models) behind a single
-OpenAI-compatible endpoint and API key. I use it as a way to reach models that
-aren't part of my primary Anthropic/Foundry setup without juggling a separate
-account and key per provider.
+[OpenRouter](https://openrouter.ai) is a router that sits in front of many
+model providers (Anthropic, OpenAI, Google, Meta, DeepSeek, Mistral,
+Groq-hosted models, and many open-weight models) behind one OpenAI-compatible
+endpoint and API key. I use it to reach models outside my main Anthropic and
+Foundry setup, without a separate account and key for each provider.
 
-Practical reasons to reach for it:
+Reasons I use it:
 
-- **One key, many models.** Any tool that already speaks the OpenAI chat
+- One key, many models. Any tool that already speaks the OpenAI chat
   completions API can point at OpenRouter (`https://openrouter.ai/api/v1`)
-  and get access to the full model catalog just by changing the model string.
-- **Good for trying a model once.** When I want to compare a specific
-  response against an open-weight or non-Anthropic model without setting up
-  a dedicated provider account, OpenRouter is the fastest path.
-- **Fallback routing.** OpenRouter can automatically fall back to an
-  alternate provider/model if the primary one is down or rate-limited,
-  configurable per request.
+  and reach the full model catalog. You only change the model name.
+- Good for trying a model once. When I want to compare a response against an
+  open-weight or non-Anthropic model, OpenRouter is the fastest path. I do
+  not need a separate account for that provider.
+- Fallback routing. If a request's primary provider or model is down or
+  rate-limited, OpenRouter can send the request to a different provider or
+  model. You can configure this per request.
 
-Most of my agent CLIs and editor integrations that support a custom
-OpenAI-compatible base URL can be pointed at OpenRouter the same way they'd
-be pointed at any other compatible endpoint — set the base URL to
-`https://openrouter.ai/api/v1`, set the API key, and pick a model from
-OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1`).
+Most of my agent CLIs and editor tools accept a custom OpenAI-compatible base
+URL. To use OpenRouter with them: set the base URL to
+`https://openrouter.ai/api/v1`, set the API key, and pick a model from the
+OpenRouter catalog. Each model name carries a provider prefix, for example
+`deepseek/deepseek-v4.1`.
 
-### Fees when adding funds
+### Fees when you add funds
 
-OpenRouter charges a processing fee (around 5%) on top of every deposit, with
-a minimum charge — so small top-ups pay a disproportionately high effective
-rate. Add at least **$15** at a time to keep the fee from eating an outsized
-share of the deposit. I pay with a 2% cashback rewards card, which brings my
-net effective fee down to roughly 3%.
+OpenRouter charges a processing fee, close to 5 percent, on every deposit,
+and it applies a minimum charge. A small deposit pays a much higher effective
+rate because of that minimum. Add at least $15 at a time to keep the fee from
+taking an outsized share of the deposit. I pay with a rewards credit card that
+returns 2 percent cash back. This brings my net fee down to close to 3
+percent.
 
 ## Neovim with Copilot
 
-For editor-integrated pair programming, ghost-text style inline suggestions,
-and autocomplete, I use [github/copilot.vim](https://github.com/github/copilot.vim)
-— the official Vim/Neovim plugin — installed via
+For pair programming inside the editor, ghost-text suggestions (dimmed text
+shown ahead of your cursor), and autocomplete, I use
+[github/copilot.vim](https://github.com/github/copilot.vim). This is the
+official Vim and Neovim plugin. I install it with
 [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
@@ -252,87 +257,83 @@ require("lazy").setup({
 })
 ```
 
-I run it with the plugin's defaults rather than customizing keybindings —
-after `:Copilot setup` (or `:Copilot auth`) to authenticate once, it just
-works:
+I keep the default keybindings. Run `:Copilot setup` (or `:Copilot auth`)
+once to sign in. After that, the plugin works without further setup:
 
-- Suggestions appear as ghost text (dimmed inline text) as you type in insert
-  mode.
-- `Tab` accepts the full suggestion (the plugin remaps `Tab` for this by
-  default).
-- `Alt-]` / `Alt-[` cycle to the next/previous suggestion when more than one
-  is available.
-- `Ctrl-]` dismisses the current suggestion without accepting it.
+- Suggestions show as ghost text while you type in insert mode.
+- Press `Tab` to accept the full suggestion. The plugin remaps `Tab` for this
+  by default.
+- Press `Alt-]` or `Alt-[` to move to the next or previous suggestion, when
+  more than one is available.
+- Press `Ctrl-]` to dismiss the current suggestion without accepting it.
 
-If `Tab` is already bound to something else (e.g. a snippet engine or
-completion plugin), the plugin's docs cover remapping accept to a different
-key via `g:copilot_no_tab_map` plus a manual `<Plug>(copilot-accept)` mapping
-— I haven't needed to because I don't run a conflicting `Tab` mapping in
-insert mode.
+If `Tab` is already bound to something else, for example a snippet engine or a
+completion plugin, the plugin documentation shows how to remap accept to a
+different key. Set `g:copilot_no_tab_map` and add a manual mapping to
+`<Plug>(copilot-accept)`. I have not needed this, because I do not run a
+competing `Tab` mapping in insert mode.
 
-A couple of practical notes from using it day to day:
+Notes from daily use:
 
-- It's suggestion-only (no chat panel) — for actual conversational
-  pair-programming inside Neovim I reach for a terminal-based agent (Claude
-  Code, Codex, etc.) running in a split or a Herdr pane alongside the editor,
-  rather than a chat UI baked into Neovim itself.
-- `:Copilot status` is the fastest way to confirm it's authenticated and
-  enabled for the current buffer/filetype when suggestions unexpectedly stop
-  appearing.
-- `:Copilot disable` / `:Copilot enable` toggles it per-session, useful when
-  working on something sensitive or when the suggestions are more noise than
-  signal for a particular file.
+- The plugin only suggests code. It has no chat panel. For a conversation
+  with an agent inside Neovim, I run a terminal-based agent (Claude Code,
+  Codex, and so on) in a split window or a Herdr pane next to the editor.
+- Run `:Copilot status` to make sure that the plugin is signed in and active
+  for the current file type. Use this command first if suggestions stop.
+- `:Copilot disable` and `:Copilot enable` turn the plugin off and on for the
+  current session. This is useful when you work on something sensitive, or
+  when the suggestions add more noise than value for a given file.
 
 ## Models I use
 
-Day to day, across all of the agents and tools above, I mostly reach for one
-model and reserve the others for specific situations:
+Across all the agents and tools listed above, I use one model for most work
+and reserve the others for specific cases:
 
-- **Claude Sonnet 5** — default for almost everything: day-to-day coding,
-  chat, agent work. Good balance of speed and capability for the bulk of
-  tasks.
-- **Claude Opus** — occasionally, specifically for planning and design work
-  where I want deeper reasoning before committing to an approach. Not used
-  for routine execution — too slow/expensive for that.
-- **Claude Fable** — rarely. It costs roughly 4x what Sonnet 5 does, which is
-  hard to justify outside a narrow set of cases where its behavior genuinely
-  fits better than Sonnet's.
-- **DeepSeek 4.1** — via OpenRouter, for specific tasks where I want to
-  compare against or use an open-weight model instead of Claude.
-- **GLM 5.3** — via OpenRouter, same category as DeepSeek above.
-- **Groq/Compound** — via Groq's own API directly, not OpenRouter, when I
-  want very fast inference and the task doesn't need Claude-level reasoning
-  depth. Free as far as I've seen — I've never hit a usage limit — and
-  extremely fast.
+- Claude Sonnet 5. My default for almost everything: daily coding, chat, and
+  agent work. It gives a good balance of speed and capability for most tasks.
+- Claude Opus. I use this only for planning and design work, when I want
+  deeper reasoning before I commit to an approach. I do not use it for
+  routine execution. It costs more and runs slower than routine tasks need.
+- Claude Fable. I use this rarely. It costs close to 4 times what Sonnet 5
+  costs. That price is hard to justify outside a narrow set of cases where
+  its output fits the task better than Sonnet's.
+- DeepSeek 4.1. I use this through OpenRouter, for tasks where I want to
+  compare against, or use, an open-weight model instead of Claude.
+- GLM 5.3. I use this through OpenRouter, for the same reason as DeepSeek
+  above.
+- Groq/Compound. I use this through Groq's own API, not through OpenRouter. I
+  reach for it when I want very fast inference and the task does not need
+  Claude-level reasoning depth. It is free as far as I have seen. I have never
+  hit a usage limit, and it is extremely fast.
 
-The pattern in general: pick the cheapest/fastest model that's still reliable
-for the task, and only reach for a heavier model when the task is genuinely
-hard (planning, architecture decisions, ambiguous problems) rather than just
-long.
+The general pattern: pick the cheapest and fastest model that still gives a
+reliable result for the task. Use a larger model only when the task itself is
+hard (planning, architecture decisions, an ambiguous problem), not because the
+task is long.
 
 ## Using GitHub to manage an agentic workflow
 
-TODO: notes on how I use GitHub itself as guardrails around agentic coding
-work — protected `main` branch, all changes go through a pull request (even
-my own solo work), required linear history / rebase merges, branch rulesets,
-and anything else that keeps an agent from pushing straight to `main` or
-rewriting history it should not touch.
+TODO: notes on how I use GitHub itself as a guardrail around agentic coding
+work. This includes a protected `main` branch, all changes through a pull
+request (including my own solo work), required linear history with rebase
+merges, and branch rulesets. The goal is to keep an agent from pushing
+straight to `main` or rewriting history it must not touch.
 
 ## License
 
 Copyright (C) 2026 Preston Hunt
 
-Licensed under the GNU General Public License v3.0 — see [LICENSE](LICENSE).
-Anyone who distributes this work or a modified version of it must make the
-corresponding source available under the same license.
+This work is under the GNU General Public License, version 3.0. Read the full
+text in [LICENSE](LICENSE). If you distribute this work, or a modified version
+of it, you must make the corresponding source available under the same
+license.
 
 ## Todo
 
 Tools and ideas I want to look into, but have not tried yet:
 
-- [seshagy](https://github.com/lmilojevicc/seshagy). An agent-aware
-  terminal dashboard that shows your project directories, active
-  multiplexer sessions, and terminal-based coding agents in one view. It
-  has native support for both tmux and Herdr, and under Herdr it uses
-  Herdr's own agent-state detection directly, so it lines up with the
-  Herdr setup described above.
+- [seshagy](https://github.com/lmilojevicc/seshagy). An agent-aware terminal
+  dashboard that shows your project directories, active multiplexer sessions,
+  and terminal-based coding agents in one view. It has native support for
+  both tmux and Herdr. Under Herdr, it uses the agent-state detection that
+  Herdr provides, so it lines up with the Herdr setup described above.

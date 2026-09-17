@@ -1,47 +1,48 @@
 # Why I prefer CLI/TUI over desktop apps
 
-I default to terminal and TUI tools over traditional GUI desktop apps
-wherever a good terminal option exists — terminal editors, `lazygit` over
-GitHub Desktop, `k9s` over a Kubernetes dashboard, agent CLIs over chat-app
-wrappers, and so on. A few reasons, some from my own experience and some
-backed by what's out there:
+I use terminal and TUI (text user interface) tools instead of desktop apps
+whenever a good terminal option exists. For example, I use `lazygit` instead
+of GitHub Desktop, `k9s` instead of a Kubernetes dashboard app, and agent CLIs
+instead of chat-app wrappers. The reasons below come from my own experience
+and from what other people have written.
 
-- **Startup and response time.** A GUI app — especially anything built on
-  Electron — has to spin up a rendering engine, load a framework, draw
-  widgets, and manage window chrome before you can do anything. A CLI/TUI
-  tool starts, does its job, and gets out of your way. That difference in
-  latency isn't just "a bit annoying" — it breaks concentration and flow
-  every time you have to wait on it.
-- **Resource footprint.** TUI tools don't drag in Electron/Chromium just to
-  render some text, which matters a lot on a remote box, a container, or
-  anywhere resources are constrained — `htop`/`btop` over a full GUI resource
-  monitor is a good example.
-- **Remote-first by default.** SSH into a box and a TUI just works; a GUI
-  either isn't an option at all or means X11 forwarding and a noticeably
-  worse experience. Since a lot of my work happens over SSH (see the Herdr
-  notes in the main README), this alone rules out most GUI equivalents.
-- **Composability.** Small tools that do one thing well and pipe into each
-  other (`fd`, `rg`, `fzf`, etc.) let you build exactly the query you need on
-  the fly. There's no GUI equivalent that's as flexible to assemble in the
+- Startup and response time. A desktop app, especially one built on
+  Electron, must start a rendering engine, load a framework, draw its
+  widgets, and manage its window before you can use it. A CLI or TUI tool
+  starts, does its job, and gets out of your way. This difference in speed is
+  not a small annoyance. Each time an app makes you wait, it breaks your
+  concentration.
+- Resource use. TUI tools do not need Electron or a browser engine to show
+  text. This matters on a remote machine, inside a container, or anywhere
+  resources are limited. `htop` and `btop` show this well when you compare
+  them with a full graphical resource monitor.
+- Works over SSH. Connect to a machine over SSH, and a TUI tool works right
+  away. A desktop app either does not run at all, or needs X11 forwarding,
+  which gives a worse experience. I do most of my work over SSH (read the
+  Herdr notes in the main README), so this alone rules out most desktop
+  apps.
+- Tools combine well. Small tools that each do one job, and pass data to
+  each other through pipes, let you build the exact query you need on the
+  spot. No desktop app gives you the same freedom to combine tools in the
   moment.
-- **AI agents live in the terminal anyway.** Claude Code, Codex, and most
-  other coding agents are inherently CLI/terminal-bound tools — they operate
-  on files, git, and shells. A terminal-centric workflow is simply the
-  native environment for agent-driven development right now, not a
-  nostalgia choice.
+- AI agents already live in the terminal. Claude Code, Codex, and most other
+  coding agents are terminal tools by nature. They work with files, git, and
+  the shell. A terminal-based workflow is the natural fit for agent-driven
+  development today. It is not a nostalgic choice.
 
-## Keyboard vs. mouse
+## Keyboard versus mouse
 
-Beyond the CLI/TUI question generally, staying on the keyboard instead of
-reaching for the mouse is, in my experience, a meaningful efficiency gain on
-its own — every hand movement from keyboard to mouse and back costs time and
-breaks typing flow. This one is genuinely debated rather than settled
-science: there are old, widely cited claims that the mouse is actually faster
-for most tasks (see [Dan Luu's dig into where those studies actually came
-from](https://danluu.com/keyboard-v-mouse/)), and the honest conclusion is
-that it depends heavily on the task — raw text manipulation and navigating a
-tool you already know well tends to favor the keyboard, while some pointing
-and selection tasks genuinely favor the mouse. For the kind of work I do
-(editing, navigating agent panes, git operations, running commands), staying
-keyboard-driven wins in practice, which is exactly why I gravitate toward
-tools that are designed keyboard-first rather than mouse-first.
+Beyond the CLI and TUI question, staying on the keyboard instead of reaching
+for the mouse gives a real efficiency gain on its own, in my experience. Each
+time your hand moves from the keyboard to the mouse and back, you lose time
+and break your typing flow.
+
+This point is disputed, not settled fact. Old and often-cited claims say the
+mouse is faster for most tasks. Read [Dan Luu's look into where those claims
+came from](https://danluu.com/keyboard-v-mouse/) for the background. The
+honest answer depends on the task. Editing text, and working in a tool you
+already know well, tends to favor the keyboard. Some pointing and selection
+tasks favor the mouse. For the kind of work I do (editing, moving between
+agent panes, git operations, running commands), staying on the keyboard wins
+in practice. This is why I favor tools built keyboard-first over tools built
+mouse-first.
