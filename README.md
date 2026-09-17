@@ -25,6 +25,9 @@ happens.
   - [Claude Code](#claude-code)
   - [Codex](#codex)
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
+- [gptel.el in Emacs](#gptelel-in-emacs)
+- [OpenRouter](#openrouter)
+- [Models I use](#models-i-use)
 
 ## Herdr as an AI agent multiplexer
 
@@ -180,6 +183,103 @@ Sources besides a bare `owner/repo` shorthand also work: full GitHub/GitLab
 URLs, a direct path to a skill subdirectory within a repo, any git URL
 (including private repos, using whatever auth is already configured for that
 remote), or a local path.
+
+## gptel.el in Emacs
+
+[gptel](https://github.com/karthink/gptel) is the Emacs package I use for
+in-editor LLM chat and completion — a lightweight universal client rather than
+a heavyweight IDE-agent integration. It supports many backends (OpenAI,
+Anthropic, Gemini, Ollama, Bedrock, and more) through a common interface, so
+switching models is a config-level concern, not a workflow change.
+
+The useful trick is `gptel-make-anthropic`, which lets you point gptel at any
+Anthropic-Messages-API-compatible endpoint instead of just `api.anthropic.com`
+— handy for a company-hosted Foundry/gateway endpoint:
+
+```elisp
+(defun use-anthropic ()
+  (gptel-make-anthropic "Claude-Foundry"
+    :host     "my-foundry-host.example.com"  ; no scheme, no path
+    :endpoint "/v1/messages"                 ; base-url path + /v1/messages
+    :stream   t
+    :key      (lambda () (getenv "ANTHROPIC_API_KEY"))  ; never hardcode the key
+    :header   (lambda ()
+                (let ((k (getenv "ANTHROPIC_API_KEY")))
+                  `(("x-api-key" . ,k)
+                    ("api-key"   . ,k)
+                    ("anthropic-version" . "2023-06-01"))))
+    :models   '(claude-sonnet-5 claude-opus-5)))
+
+(use-package gptel
+  :config
+  (use-anthropic)
+  :ensure t)
+```
+
+Notes:
+
+- Pull the API key from an environment variable (or a proper secrets store)
+  rather than hardcoding it in `init.el` — especially if `init.el` ever ends
+  up in a dotfiles repo. `:key` and the values inside `:header` both accept a
+  function, so a lambda reading `getenv` works cleanly.
+- `:models` is a list of model IDs the endpoint actually serves; gptel uses
+  this to populate its model-switching UI (`gptel-menu` / `M-x gptel-send`
+  transient), so it needs to match what your gateway calls them, not
+  necessarily Anthropic's public model names.
+- Package installed via `elpa`/`use-package` as normal; no special setup
+  beyond `:ensure t` and the backend config above.
+
+## OpenRouter
+
+[OpenRouter](https://openrouter.ai) is a unified API/router that sits in
+front of dozens of model providers (Anthropic, OpenAI, Google, Meta, DeepSeek,
+Mistral, Groq-hosted models, and many open-weight models) behind a single
+OpenAI-compatible endpoint and API key. I use it as a way to reach models that
+aren't part of my primary Anthropic/Foundry setup without juggling a separate
+account and key per provider.
+
+Practical reasons to reach for it:
+
+- **One key, many models.** Any tool that already speaks the OpenAI chat
+  completions API can point at OpenRouter (`https://openrouter.ai/api/v1`)
+  and get access to the full model catalog just by changing the model string.
+- **Good for trying a model once.** When I want to compare a specific
+  response against an open-weight or non-Anthropic model without setting up
+  a dedicated provider account, OpenRouter is the fastest path.
+- **Fallback routing.** OpenRouter can automatically fall back to an
+  alternate provider/model if the primary one is down or rate-limited,
+  configurable per request.
+
+Most of my agent CLIs and editor integrations that support a custom
+OpenAI-compatible base URL can be pointed at OpenRouter the same way they'd
+be pointed at any other compatible endpoint — set the base URL to
+`https://openrouter.ai/api/v1`, set the API key, and pick a model from
+OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1` or
+`groq/compound`).
+
+## Models I use
+
+Day to day, across all of the agents and tools above, I mostly reach for one
+model and reserve the others for specific situations:
+
+- **Claude Sonnet 5** — default for almost everything: day-to-day coding,
+  chat, agent work. Good balance of speed and capability for the bulk of
+  tasks.
+- **Claude Opus** — occasionally, specifically for planning and design work
+  where I want deeper reasoning before committing to an approach. Not used
+  for routine execution — too slow/expensive for that.
+- **Claude Fable** — rarely, for specific cases where its behavior fits
+  better than Sonnet's.
+- **DeepSeek 4.1** — via OpenRouter, for specific tasks where I want to
+  compare against or use an open-weight model instead of Claude.
+- **GLM 5.3** — via OpenRouter, same category as DeepSeek above.
+- **Groq/Compound** — via OpenRouter (Groq-hosted), when I want very fast
+  inference and the task doesn't need Claude-level reasoning depth.
+
+The pattern in general: pick the cheapest/fastest model that's still reliable
+for the task, and only reach for a heavier model when the task is genuinely
+hard (planning, architecture decisions, ambiguous problems) rather than just
+long.
 
 ## License
 
