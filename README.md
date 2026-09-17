@@ -27,6 +27,7 @@ happens.
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
 - [gptel.el in Emacs](#gptelel-in-emacs)
 - [OpenRouter](#openrouter)
+- [Neovim with Copilot](#neovim-with-copilot)
 - [Models I use](#models-i-use)
 
 ## Herdr as an AI agent multiplexer
@@ -256,6 +257,52 @@ be pointed at any other compatible endpoint — set the base URL to
 `https://openrouter.ai/api/v1`, set the API key, and pick a model from
 OpenRouter's catalog (provider-prefixed, e.g. `deepseek/deepseek-v4.1` or
 `groq/compound`).
+
+## Neovim with Copilot
+
+For editor-integrated pair programming, ghost-text style inline suggestions,
+and autocomplete, I use [github/copilot.vim](https://github.com/github/copilot.vim)
+— the official Vim/Neovim plugin — installed via
+[lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+require("lazy").setup({
+  -- ...
+  "github/copilot.vim",
+  -- ...
+})
+```
+
+I run it with the plugin's defaults rather than customizing keybindings —
+after `:Copilot setup` (or `:Copilot auth`) to authenticate once, it just
+works:
+
+- Suggestions appear as ghost text (dimmed inline text) as you type in insert
+  mode.
+- `Tab` accepts the full suggestion (the plugin remaps `Tab` for this by
+  default).
+- `Alt-]` / `Alt-[` cycle to the next/previous suggestion when more than one
+  is available.
+- `Ctrl-]` dismisses the current suggestion without accepting it.
+
+If `Tab` is already bound to something else (e.g. a snippet engine or
+completion plugin), the plugin's docs cover remapping accept to a different
+key via `g:copilot_no_tab_map` plus a manual `<Plug>(copilot-accept)` mapping
+— I haven't needed to because I don't run a conflicting `Tab` mapping in
+insert mode.
+
+A couple of practical notes from using it day to day:
+
+- It's suggestion-only (no chat panel) — for actual conversational
+  pair-programming inside Neovim I reach for a terminal-based agent (Claude
+  Code, Codex, etc.) running in a split or a Herdr pane alongside the editor,
+  rather than a chat UI baked into Neovim itself.
+- `:Copilot status` is the fastest way to confirm it's authenticated and
+  enabled for the current buffer/filetype when suggestions unexpectedly stop
+  appearing.
+- `:Copilot disable` / `:Copilot enable` toggles it per-session, useful when
+  working on something sensitive or when the suggestions are more noise than
+  signal for a particular file.
 
 ## Models I use
 
