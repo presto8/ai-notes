@@ -167,7 +167,7 @@ Two skills I installed with `npx skills add` and use often:
 [gptel](https://github.com/karthink/gptel) is the Emacs package I use for LLM
 chat and text completion inside the editor. It is a light client, not a full
 IDE-agent integration. It supports many backends (OpenAI, Anthropic, Gemini,
-Ollama, Bedrock, and more) through one interface. Because of this, a model
+Ollama, and more) through one interface. Because of this, a model
 switch is a configuration change, not a change in how you work.
 
 The function `gptel-make-anthropic` lets you point gptel at any endpoint that
