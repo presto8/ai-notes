@@ -134,12 +134,13 @@ that your git client already has for that remote.
 Two skills I installed with `npx skills add` and use often:
 
 - [SimpleEnglish](https://github.com/AminBlg/SimpleEnglish). This skill makes
-  an agent write in ASD-STE100 Simplified Technical English. This is a
-  controlled language that aerospace has used since 1983 to make instructions
-  hard to misread. The rules include short sentences, active voice, one
-  instruction per sentence, and no hedging words such as "should" or "might".
-  I use it when I want an agent's writing (documents, replies, commit
-  messages) to read as plain and clear instead of typical AI prose. Install:
+  an agent write in [ASD-STE100](https://www.asd-ste100.org/) Simplified
+  Technical English. This is a controlled language that aerospace has used
+  since 1983 to make instructions hard to misread. The rules include short
+  sentences, active voice, one instruction per sentence, and no hedging words
+  such as "should" or "might". I use it when I want an agent's writing
+  (documents, replies, commit messages) to read as plain and clear instead of
+  typical AI prose. Install:
 
   ```sh
   npx skills add AminBlg/SimpleEnglish
