@@ -23,7 +23,7 @@ and does not follow a fixed structure.
   - [Codex](#codex)
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
 - [Skills I use](#skills-i-use)
-- [gptel.el in Emacs](#gptelel-in-emacs)
+- [gptel in Emacs](#gptel-in-emacs)
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
 - [Models I use](#models-i-use)
@@ -162,7 +162,7 @@ Two skills I installed with `npx skills add` and use often:
   After you install it, ask the agent to "security audit this codebase" or
   "find security vulnerabilities in ./src". The skill activates on its own.
 
-## gptel.el in Emacs
+## gptel in Emacs
 
 [gptel](https://github.com/karthink/gptel) is the Emacs package I use for LLM
 chat and text completion inside the editor. It is a light client, not a full
