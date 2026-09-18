@@ -26,6 +26,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [gptel in Emacs](#gptel-in-emacs)
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
+- [GUI](#gui)
 - [Models I use](#models-i-use)
 - [Using GitHub to manage an agentic workflow](#using-github-to-manage-an-agentic-workflow)
 - [Todo](#todo)
@@ -126,6 +127,10 @@ IDE-agent integration. It supports many backends (OpenAI, Anthropic, Gemini,
 Ollama, and more) through one interface. Because of this, a model
 switch is a configuration change, not a change in how you work.
 
+I don't use gptel agentically. I mostly use it as a "Google search"
+replacement: quick one-off questions answered inline in a buffer, not
+multi-step tool-calling workflows.
+
 The function `gptel-make-anthropic` lets you point gptel at any endpoint that
 speaks the Anthropic Messages API, not only `api.anthropic.com`. This is
 useful for a company-hosted gateway endpoint:
@@ -215,6 +220,29 @@ Notes from daily use:
 - `:Copilot disable` and `:Copilot enable` turn the plugin off and on for the
   current session. This is useful when you work on something sensitive, or
   when the suggestions add more noise than value for a given file.
+
+## GUI
+
+I prefer CLI/TUI tools for the reasons in
+[Why I prefer CLI/TUI over desktop apps](#why-i-prefer-clitui-over-desktop-apps)
+above, but I do have experience with GUI, IDE, and other integrated desktop
+apps. Notes on each:
+
+### Claude Code / Cowork Desktop
+
+TODO.
+
+### Codex Desktop
+
+TODO.
+
+### Visual Studio Code
+
+TODO.
+
+### Gemini Enterprise
+
+TODO.
 
 ## Models I use
 
