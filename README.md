@@ -1,16 +1,9 @@
 # ai-notes
 
-Notes on my AI workflow: tools, configurations, and lessons learned. I share
-them here in case they help others. Most of what I learn about AI tools does
-not fit into a blog post or a single polished article, so this repository is
-where I record each lesson as it happens.
-
-## What is here
-
 This repository is a running set of notes on how I use AI each day: agent
 setups, CLI tools, configuration tricks, prompts that work well, and lessons I
 learned the hard way. The notes are informal. The repository grows over time
-and does not follow a fixed structure.
+and does not follow a fixed structure. I share it in case it helps others.
 
 ## Contents
 
