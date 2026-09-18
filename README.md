@@ -226,6 +226,18 @@ Reasons I use it:
 - Fallback routing. If a request's primary provider or model is down or
   rate-limited, OpenRouter can send the request to a different provider or
   model. You can configure this per request.
+- Popularity data. OpenRouter publishes which models its users call the
+  most. The [rankings page](https://openrouter.ai/rankings) shows token
+  volume by model, and you can filter it by category, such as programming
+  or roleplay. The [models page](https://openrouter.ai/models?order=top-weekly)
+  sorts the full catalog by weekly usage. This is a fast way to see which
+  models people use in practice, not only which ones benchmark well.
+- An automatic model. The [Auto Router](https://openrouter.ai/openrouter/auto)
+  (`openrouter/auto`) reads each prompt and picks a model for it from a
+  curated set, powered by NotDiamond. Use it when you do not want to choose a
+  model yourself. The response says which model it used. Read the
+  [Auto Router documentation](https://openrouter.ai/docs/features/model-routing)
+  for the details.
 
 Most of my agent CLIs and editor tools accept a custom OpenAI-compatible base
 URL. To use OpenRouter with them: set the base URL to
