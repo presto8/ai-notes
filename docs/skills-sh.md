@@ -2,21 +2,26 @@
 
 [skills.sh](https://skills.sh) is an open registry for Agent Skills. An Agent
 Skill is a portable package of procedural knowledge, defined in a file named
-`SKILL.md`. Many agents (OpenAI Codex, OpenCode, Cursor, Hermes, and others)
-read a common skills format from a shared `.agents/skills/` directory.
-Unfortunately, Claude Code uses its own flavor in its own `.claude/skills/`
-directory. The `skills` CLI hides this difference. It runs with `npx skills`,
-needs no separate install, and writes each skill to the correct place for
-each agent you use.
+`SKILL.md`. Many agents (Codex, Gemini CLI, GitHub Copilot, OpenCode, Cursor,
+and others) read a common skills format from a shared `.agents/skills/`
+directory. Unfortunately, Claude Code and Hermes each use their own flavor in
+their own directory. The `skills` CLI hides this difference. It runs with
+`npx skills`, needs no separate install, and writes each skill to the correct
+place for each agent you use.
 
 ## Where each agent keeps its skills
 
+Paths come from the `skills` CLI's own agent table (version 1.7.0).
+
 | Agent | Project path | Global path |
 |---|---|---|
-| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
-| Codex | `.agents/skills/` | (Codex-specific path) |
-| Hermes Agent | `.hermes/skills/` | `~/.hermes/skills/` |
+| Codex | `.agents/skills/` | `~/.codex/skills/` |
+| Gemini CLI | `.agents/skills/` | `~/.gemini/skills/` |
+| GitHub Copilot | `.agents/skills/` | `~/.copilot/skills/` |
+| OpenCode | `.agents/skills/` | `~/.config/opencode/skills/` |
 | Cursor | `.agents/skills/` | `~/.cursor/skills/` |
+| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
+| Hermes Agent | `.hermes/skills/` | `~/.hermes/skills/` |
 
 ## Commands
 
