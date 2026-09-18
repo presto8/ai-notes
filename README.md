@@ -76,12 +76,12 @@ I use the Codex CLI. TODO: notes on setup and workflow.
 
 [skills.sh](https://skills.sh) is an open registry for Agent Skills. An Agent
 Skill is a portable package of procedural knowledge, defined in a file named
-`SKILL.md`. Many agents (OpenAI Codex, OpenCode, Cursor, Hermes, and others)
-read a common skills format from a shared directory. Unfortunately, Claude
-Code uses its own flavor in its own `.claude/skills/` directory. The `skills`
-CLI hides this difference for you. It runs with `npx skills`, needs no
-separate install, and writes each skill to the correct place for each agent
-you use:
+`SKILL.md`. Many agents (Codex, Gemini CLI, GitHub Copilot, OpenCode, Cursor,
+and others) read a common skills format from a shared `.agents/skills/`
+directory. Unfortunately, Claude Code and Hermes each use their own flavor in
+their own directory. The `skills` CLI hides this difference for you. It runs
+with `npx skills`, needs no separate install, and writes each skill to the
+correct place for each agent you use:
 
 ```sh
 npx skills add AminBlg/SimpleEnglish
