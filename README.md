@@ -234,8 +234,8 @@ Reasons I use it:
   models people use in practice, not only which ones benchmark well.
 - An automatic model. The [Auto Router](https://openrouter.ai/openrouter/auto)
   (`openrouter/auto`) reads each prompt and picks a model for it from a
-  curated set, powered by NotDiamond. Use it when you do not want to choose a
-  model yourself. The response says which model it used. Read the
+  curated set. Use it when you do not want to choose a model yourself. The
+  response says which model it used. Read the
   [Auto Router documentation](https://openrouter.ai/docs/features/model-routing)
   for the details.
 
