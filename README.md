@@ -5,6 +5,13 @@ setups, CLI tools, configuration tricks, prompts that work well, and lessons I
 learned the hard way. The notes are informal. The repository grows over time
 and does not follow a fixed structure. I share it in case it helps others.
 
+In the spirit of bending the knee to our new AI overlords, every file in this
+repository was written and committed by an agent. I have not edited a single
+line by hand. I only talk to the agent and review the pull requests.
+
+Feedback, questions, comments, and improvements are welcome. Email me at
+[me@prestonhunt.com](mailto:me@prestonhunt.com).
+
 ## Contents
 
 - [Why I prefer CLI/TUI over desktop apps](#why-i-prefer-clitui-over-desktop-apps)
