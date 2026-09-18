@@ -4,12 +4,10 @@
 Skill is a portable package of procedural knowledge, defined in a file named
 `SKILL.md`. Many agents (OpenAI Codex, OpenCode, Cursor, Hermes, and others)
 read a common skills format from a shared `.agents/skills/` directory.
-Anthropic does not. Claude Code keeps its own flavor in its own
-`.claude/skills/` directory, so a skill you install for every other agent
-still needs a second copy for Claude. It is an odd choice for a format that
-is otherwise portable, and it puts the burden on users. The `skills` CLI
-hides this difference. It runs with `npx skills`, needs no separate install,
-and writes each skill to the correct place for each agent you use.
+Unfortunately, Claude Code uses its own flavor in its own `.claude/skills/`
+directory. The `skills` CLI hides this difference. It runs with `npx skills`,
+needs no separate install, and writes each skill to the correct place for
+each agent you use.
 
 ## Where each agent keeps its skills
 
