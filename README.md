@@ -282,11 +282,13 @@ straight to `main` or rewriting history it must not touch.
 
 ## Currently investigating
 
-All three tools below attack the same problem: how to let an agent run code
-and call APIs without handing it my real credentials or open network access.
-Each one blocks outbound traffic by default and injects credentials outside
-the agent's reach. They differ in where the isolation boundary sits. I am
-testing them now and have no conclusions yet.
+All the tools below attack the same problem: how to let an agent run code
+and call APIs without handing it my real credentials, my files, or open
+network access. They differ in where the isolation boundary sits: an egress
+proxy, a container, a microVM or full VM, or OS-level limits on the agent's
+processes. The first three also block outbound traffic by default and inject
+credentials outside the agent's reach. I am testing the first three now and
+have no conclusions yet; the rest are next.
 
 - [iron-proxy](https://github.com/paradigmxyz/iron-proxy). An egress
   firewall for untrusted workloads (CI jobs, agents, containers). It is a
@@ -312,6 +314,22 @@ testing them now and have no conclusions yet.
   and you can reload it on a running sandbox. It can also route model API
   calls to a backend you choose. NVIDIA calls it alpha, single-player
   software.
+- [Anthropic sandbox-runtime](https://github.com/anthropics/sandbox-runtime)
+  (`srt`). A lightweight sandbox for the commands an agent runs, with simple
+  configuration for filesystem and network limits, and credential masking. The
+  agent harness itself stays outside the sandbox. Known friction: it blocks
+  Xcode/Swift and Docker workflows.
+- [Lima](https://lima-vm.io) (or [Colima](https://colima.run) on macOS). Runs
+  the whole agent, harness included, inside a Linux VM on the Mac. Lima uses
+  Apple's Virtualization framework (vz), which some users report has slow
+  virtiofs and high host CPU; Colima can switch to a krunkit backend.
+- [smolvm](https://github.com/smol-machines/smolvm). A microVM that boots in
+  under 200 ms and works on macOS, with secrets handling, egress control, and
+  forking of a running VM.
+- bubblewrap (`bwrap`) plus nftables on Linux. Wrap only the agent's shell (not
+  the harness) in `bwrap`, then run everything in a VM on a private network
+  with nft rules that allow the inference endpoint but not the general
+  internet. A candidate for circe.
 
 ## License
 
