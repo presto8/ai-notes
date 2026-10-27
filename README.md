@@ -45,10 +45,11 @@ the keyboard-versus-mouse question.
 
 [cmux](https://cmux.com) is a native macOS terminal built on libghostty (the
 Ghostty rendering engine) for running many AI coding agents at once. It
-replaced Herdr as my daily multiplexer. Workspaces sit in a vertical sidebar
-that shows the git branch, PR status, working directory, and listening ports.
-A pane gets a notification ring when its agent needs me. Everything is
-scriptable through the `cmux` CLI and a socket API. Read
+replaced Herdr as my daily multiplexer. With Herdr I ran Ghostty as the
+terminal and Herdr inside it; cmux combines the two in one app. Workspaces sit
+in a vertical sidebar that shows the git branch, PR status, working directory,
+and listening ports. A pane gets a notification ring when its agent needs me.
+Everything is scriptable through the `cmux` CLI and a socket API. Read
 [docs/cmux.md](docs/cmux.md) for why I switched and for my configuration
 notes.
 

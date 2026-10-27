@@ -18,8 +18,12 @@ OpenCode, and Hermes in cmux panes every day. It replaced both Ghostty and
 - A sidebar that shows context. Each workspace shows its git branch, linked
   PR status, working directory, listening ports, and latest notification
   text.
-- A real macOS app. Native Cmd-key shortcuts, desktop notifications, and
-  Ghostty-quality rendering, instead of a TUI inside another terminal.
+- One tool instead of two. With Herdr I ran two programs: Ghostty as the
+  terminal, then Herdr as a TUI inside it, each with its own configuration,
+  keybindings, and notification setup. cmux combines the terminal and the
+  multiplexer in one app, so there is one thing to start and configure. It
+  also brings native Cmd-key shortcuts, desktop notifications, and Ghostty
+  rendering.
 - Programmable. Every action is in the `cmux` CLI and the socket API: create
   workspaces, split panes, send keystrokes, drive the built-in browser. Agents
   can arrange their own panes.
