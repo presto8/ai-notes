@@ -336,6 +336,11 @@ have no conclusions yet; the rest are next.
   the harness) in `bwrap`, then run everything in a VM on a private network
   with nft rules that allow the inference endpoint but not the general
   internet. A candidate for circe.
+- [nono](https://github.com/nolabs-ai/nono). A kernel-based agent sandbox
+  (not a microVM) from the team behind Sigstore. It runs on macOS, Linux and
+  WSL2, and installs with Homebrew. Because there is no VM, data does not
+  have to be copied into the sandbox, and access is easier to change per
+  task.
 
 ## License
 
