@@ -15,7 +15,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 ## Contents
 
 - [Why I prefer CLI/TUI over desktop apps](#why-i-prefer-clitui-over-desktop-apps)
-- [Herdr as an AI agent multiplexer](#herdr-as-an-ai-agent-multiplexer)
+- [cmux as my AI agent terminal](#cmux-as-my-ai-agent-terminal)
 - [Agents I use](#agents-i-use)
   - [Hermes](#hermes)
   - [OpenCode](#opencode)
@@ -41,20 +41,25 @@ let me stay on the keyboard instead of the mouse. Read
 [docs/cli-vs-gui.md](docs/cli-vs-gui.md) for the full explanation, including
 the keyboard-versus-mouse question.
 
-## Herdr as an AI agent multiplexer
+## cmux as my AI agent terminal
 
-[Herdr](https://herdr.dev) is a terminal multiplexer (a program that runs many
-terminal sessions inside one window) built for running many AI coding agents
-at the same time. It is not a general tmux replacement with agent features
-added later. I use it every day to run several agent sessions (Claude Code,
-Codex, OpenCode, Hermes) side by side, on my local machine and on remote
-machines over SSH. Read [docs/herdr.md](docs/herdr.md) for what makes it
-useful for this job and for my configuration notes.
+[cmux](https://cmux.com) is a native macOS terminal built on libghostty (the
+Ghostty rendering engine) for running many AI coding agents at once. It
+replaced Herdr as my daily multiplexer. Workspaces sit in a vertical sidebar
+that shows the git branch, PR status, working directory, and listening ports.
+A pane gets a notification ring when its agent needs me. Everything is
+scriptable through the `cmux` CLI and a socket API. Read
+[docs/cmux.md](docs/cmux.md) for why I switched and for my configuration
+notes.
+
+cmux runs only on macOS. On Linux I am still looking for a replacement; see
+[docs/cmux.md](docs/cmux.md#linux) for the candidates. My older Herdr notes are
+in [docs/herdr.md](docs/herdr.md).
 
 ## Agents I use
 
 Short notes on how each agent CLI fits into the workflow above. I run all of
-them inside Herdr panes each day.
+them inside cmux panes each day.
 
 ### Hermes
 
@@ -215,7 +220,7 @@ Notes from daily use:
 
 - The plugin only suggests code. It has no chat panel. For a conversation
   with an agent inside Neovim, I run a terminal-based agent (Claude Code,
-  Codex, and so on) in a split window or a Herdr pane next to the editor.
+  Codex, and so on) in a split window or a cmux pane next to the editor.
 - Run `:Copilot status` to make sure that the plugin is signed in and active
   for the current file type. Use this command first if suggestions stop.
 - `:Copilot disable` and `:Copilot enable` turn the plugin off and on for the
@@ -348,4 +353,5 @@ Tools and ideas I want to look into, but have not tried yet:
   dashboard that shows your project directories, active multiplexer sessions,
   and terminal-based coding agents in one view. It has native support for
   both tmux and Herdr. Under Herdr, it uses the agent-state detection that
-  Herdr provides, so it lines up with the Herdr setup described above.
+  Herdr provides, which makes it a possible piece of a Linux setup to replace
+  cmux.
