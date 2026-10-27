@@ -28,6 +28,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [Neovim with Copilot](#neovim-with-copilot)
 - [Models I use](#models-i-use)
 - [Using GitHub to manage an agentic workflow](#using-github-to-manage-an-agentic-workflow)
+- [Currently investigating](#currently-investigating)
 - [Todo](#todo)
 
 ## Why I prefer CLI/TUI over desktop apps
@@ -250,6 +251,39 @@ work. This includes a protected `main` branch, all changes through a pull
 request (including my own solo work), required linear history with rebase
 merges, and branch rulesets. The goal is to keep an agent from pushing
 straight to `main` or rewriting history it must not touch.
+
+## Currently investigating
+
+All three tools below attack the same problem: how to let an agent run code
+and call APIs without handing it my real credentials or open network access.
+Each one blocks outbound traffic by default and injects credentials outside
+the agent's reach. They differ in where the isolation boundary sits. I am
+testing them now and have no conclusions yet.
+
+- [iron-proxy](https://github.com/paradigmxyz/iron-proxy). An egress
+  firewall for untrusted workloads (CI jobs, agents, containers). It is a
+  MITM (man-in-the-middle) proxy with a built-in DNS server, shipped as one
+  binary with one YAML configuration file. It denies every outbound request
+  unless the destination is on an allowlist. The workload only holds a
+  placeholder token, and the proxy swaps in the real credential as the request
+  leaves. A stolen token is therefore useless outside the proxy. Hermes has
+  built-in support for it through `hermes egress`.
+- [Matchlock](https://github.com/jingkaihe/matchlock). A CLI that runs an
+  agent in a disposable microVM (a small, fast-booting virtual machine). It
+  uses Firecracker on Linux and Apple Virtualization.framework on macOS, and
+  boots in under a second. `--allow-host` seals the network to the listed
+  hosts. `--secret NAME@host` injects a secret into requests to that host from
+  the host side, so the secret never enters the VM. It also has Go, Python,
+  and TypeScript SDKs. The project marks itself as experimental.
+- [NVIDIA OpenShell](https://github.com/NVIDIA/OpenShell). A sandboxed
+  runtime for agents. `openshell sandbox create -- claude` (or `codex`,
+  `opencode`, `copilot`) starts an agent in an isolated container behind a
+  gateway. Declarative YAML policies cover four layers: filesystem, network,
+  process, and inference. The network policy works at the HTTP method and
+  path level (for example, allow `GET` but block `POST` on the GitHub API),
+  and you can reload it on a running sandbox. It can also route model API
+  calls to a backend you choose. NVIDIA calls it alpha, single-player
+  software.
 
 ## License
 
