@@ -31,6 +31,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [GUI](#gui)
 - [Models I use](#models-i-use)
 - [Using GitHub to manage an agentic workflow](#using-github-to-manage-an-agentic-workflow)
+- [Canary tokens](#canary-tokens)
 - [Currently investigating](#currently-investigating)
 - [Todo](#todo)
 
@@ -327,6 +328,24 @@ work. This includes a protected `main` branch, all changes through a pull
 request (including my own solo work), required linear history with rebase
 merges, and branch rulesets. The goal is to keep an agent from pushing
 straight to `main` or rewriting history it must not touch.
+
+## Canary tokens
+
+[Canarytokens](https://canarytokens.org/nest/) is a free tool from Thinkst that
+plants tripwires and reports when something touches them. I create a token on
+that page and leave it where a person, a program, or an agent has no good
+reason to go: a fake cloud access key in a `.env` file, a URL in a note, a
+hostname in a DNS zone, a document in a shared folder. Each token is unique,
+so an alert tells me which trap fired and when. Alerts go to email, or to a
+webhook if I want to route them somewhere else.
+
+I use canary tokens as the detection half of the agent-safety setup below. An
+egress proxy or a sandbox tries to keep a secret from leaving. A canary token
+does not prevent anything. It tells me that a line was crossed: an agent read
+and used a credential it should not have had, a backup showed up somewhere
+unexpected, or somebody opened a file they were not meant to see. The tokens
+are harmless and cost nothing, so I can leave several in place and forget about
+them until one fires.
 
 ## Currently investigating
 
