@@ -24,6 +24,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
 - [Skills I use](#skills-i-use)
 - [gptel in Emacs](#gptel-in-emacs)
+- [Routers](#routers)
 - [OpenRouter](#openrouter)
 - [Neovim with Copilot](#neovim-with-copilot)
 - [GUI](#gui)
@@ -174,6 +175,30 @@ Notes:
   are not always the public Anthropic model names.
 - Install the package through `elpa` and `use-package` as normal. It needs no
   setup beyond `:ensure t` and the backend configuration shown above.
+
+## Routers
+
+A router (also called an aggregator or gateway) puts many model providers
+behind one endpoint and one API key, and sends each request to the provider
+that serves the model you picked. The appeal is leverage: one integration, one
+bill, and a model switch that is a configuration change instead of a new
+account and a new SDK. The cost is another party in the middle. It sees the
+prompts, it may add a margin, and it can change the model list or the retention
+terms on short notice. Some routers charge per token; some, like the agent
+plans below, bundle model access into a flat monthly price. These are the ones
+I have explored:
+
+- [OpenRouter](https://openrouter.ai). Many models behind one OpenAI-compatible
+  endpoint, plus an Auto Router that picks a model for each prompt. Read
+  [docs/openrouter.md](docs/openrouter.md) for the details, including a note on
+  deposit fees.
+- [Command Code](https://commandcode.ai). A terminal agent whose plans also
+  work as a router: the same key works with any OpenAI- or Anthropic-compatible
+  client. Read the notes under [Agents I use](#agents-i-use).
+- [OpenCode Go](https://opencode.ai/docs/console/go). OpenCode's subscription
+  for open coding models, with an API at
+  `https://opencode.ai/inference/go` that other harnesses (Claude Code, Codex,
+  Hermes) can use. Read the notes under [Agents I use](#agents-i-use).
 
 ## OpenRouter
 
