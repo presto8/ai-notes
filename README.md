@@ -29,6 +29,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [Neovim with Copilot](#neovim-with-copilot)
 - [GUI](#gui)
 - [Models I use](#models-i-use)
+- [Zero data retention](#zero-data-retention)
 - [Using GitHub to manage an agentic workflow](#using-github-to-manage-an-agentic-workflow)
 - [Currently investigating](#currently-investigating)
 - [Todo](#todo)
@@ -302,6 +303,17 @@ The general pattern: pick the cheapest and fastest model that still gives a
 reliable result for the task. Use a larger model only when the task itself is
 hard (planning, architecture decisions, an ambiguous problem), not because the
 task is long.
+
+## Zero data retention
+
+Zero data retention (ZDR) means the provider answers a request without storing
+the prompt, the completion, or the code in between, and without using it to
+train future models. I check for it before an agent sends code or credentials
+anywhere, and I check the whole path: a ZDR label at the router does not prove
+that the upstream provider keeps nothing. Read [docs/zdr.md](docs/zdr.md) for
+what ZDR does and does not promise, the three things I check, and the November
+2026 OpenRouter incident that showed why a label is only as good as the
+verification behind it.
 
 ## Using GitHub to manage an agentic workflow
 
