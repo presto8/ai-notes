@@ -96,7 +96,7 @@ full command list, and the other install sources.
 
 ## Skills I use
 
-Two skills I installed with `npx skills add` and use often:
+Skills I installed with `npx skills add` and use often:
 
 - [SimpleEnglish](https://github.com/AminBlg/SimpleEnglish). This skill makes
   an agent write in [ASD-STE100](https://www.asd-ste100.org/) Simplified
@@ -126,6 +126,22 @@ Two skills I installed with `npx skills add` and use often:
 
   After you install it, ask the agent to "security audit this codebase" or
   "find security vulnerabilities in ./src". The skill activates on its own.
+
+- [mattpocock/skills](https://github.com/mattpocock/skills). "Skills for Real
+  Engineers": a collection of small, composable engineering skills from Matt
+  Pocock's `.agents` directory. They are designed to be adapted and to work
+  with any model, and they cover the work around the code as well as the code,
+  such as issue triage and tracking, instead of a framework that owns the
+  process. Install with:
+
+  ```sh
+  npx skills add mattpocock/skills
+  ```
+
+  Then run `/setup-matt-pocock-skills` once per repository. It asks which issue
+  tracker to use, which labels to apply during triage, and where to save docs.
+  Claude Code, Codex, and Copilot can also install the collection as a plugin
+  that updates itself.
 
 ## gptel in Emacs
 
