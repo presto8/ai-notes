@@ -19,9 +19,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 - [Agents I use](#agents-i-use)
   - [Hermes](#hermes)
   - [OpenCode](#opencode)
-  - [Claude Code](#claude-code)
-  - [Codex](#codex)
-  - [Command Code](#command-code)
+  - [Proprietary agents](#proprietary-agents)
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
 - [Skills I use](#skills-i-use)
 - [gptel in Emacs](#gptel-in-emacs)
@@ -69,7 +67,16 @@ TODO: notes on Hermes Agent setup, skills, and daily use.
 
 ### OpenCode
 
-TODO: notes on OpenCode setup and workflow.
+[OpenCode](https://opencode.ai) is an open source coding agent with a terminal
+UI, a desktop app, and a web client. It is the agent I prefer because it is
+open and works with any provider and model, so changing models is a
+configuration change rather than a new harness. It is also the most eager skill
+consumer I have used: it discovers skills in its own directory, the `.claude`
+and `.agents` compatibility directories, extra local paths, and HTTP catalogs,
+and it refreshes a cached remote skill when the catalog bumps its version. It
+does not rewrite itself; the model loads a skill when it needs one. Read
+[docs/opencode.md](docs/opencode.md) for setup, the discovery order, and my
+workflow.
 
 OpenCode Go is OpenCode's own optional subscription for open coding models. I
 do not subscribe to it, so this is a note on what it offers rather than a
@@ -91,28 +98,31 @@ works with any other provider. The plan also exposes an API at
 `https://opencode.ai/inference/go`, and other harnesses such as Claude Code,
 Codex, and Hermes can use it.
 
-### Claude Code
+### Proprietary agents
 
-I use the Claude Code CLI. TODO: notes on setup, including the Foundry-backed
-BYOK (bring your own key) configuration I use at work instead of a standard
-claude.ai account.
+Claude Code, Codex, and Command Code (`cmd`) are agents published by the
+companies that own their models and services: Anthropic, OpenAI, and Command
+Code. The client code is open in some cases (Codex's CLI is Apache-2.0), but
+the agent, the model access, and the plan are still the vendor's. Each one
+pulls me toward its own ecosystem. I prefer an open agent that I can use with
+any provider and model, which is why OpenCode above is my default. These are
+the proprietary agents I still use:
 
-### Codex
-
-I use the Codex CLI. TODO: notes on setup and workflow.
-
-### Command Code
-
-[Command Code](https://commandcode.ai) is a terminal coding agent built around
-open models. I use the GOAT plan: $10/month for 30+ open and closed models,
-with up to $100 of monthly credits depending on the model. Usage is capped at
-$20 in any 5 hours, $50 in any 7 days, and $100 per month; cheaper models go a
-lot further inside those caps. Switch models with `/model`. The plan includes
-API access, so the same key works with any OpenAI- or Anthropic-compatible
-client at `https://api.commandcode.ai/provider/v1`, but the CLI is where the
-harness work pays off: tool-call repairs are free, and a high cache hit rate
-turns most of a request into cheap cache reads. Install with
-`npm i -g command-code` and run `cmd`.
+- **Claude Code.** Anthropic's CLI. TODO: notes on setup, including the
+  Foundry-backed BYOK (bring your own key) configuration I use at work instead
+  of a standard claude.ai account.
+- **Codex.** OpenAI's CLI. TODO: notes on setup and workflow.
+- **Command Code (`cmd`).** [Command Code](https://commandcode.ai) is a
+  terminal coding agent built around open models. I use the GOAT plan:
+  $10/month for 30+ open and closed models, with up to $100 of monthly credits
+  depending on the model. Usage is capped at $20 in any 5 hours, $50 in any 7
+  days, and $100 per month; cheaper models go a lot further inside those caps.
+  Switch models with `/model`. The plan includes API access, so the same key
+  works with any OpenAI- or Anthropic-compatible client at
+  `https://api.commandcode.ai/provider/v1`, but the CLI is where the harness
+  work pays off: tool-call repairs are free, and a high cache hit rate turns
+  most of a request into cheap cache reads. Install with
+  `npm i -g command-code` and run `cmd`.
 
 ## skills.sh and npx skills
 
