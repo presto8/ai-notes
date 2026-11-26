@@ -21,6 +21,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
   - [OpenCode](#opencode)
   - [Claude Code](#claude-code)
   - [Codex](#codex)
+  - [Command Code](#command-code)
 - [skills.sh and npx skills](#skillssh-and-npx-skills)
 - [Skills I use](#skills-i-use)
 - [gptel in Emacs](#gptel-in-emacs)
@@ -79,6 +80,19 @@ claude.ai account.
 ### Codex
 
 I use the Codex CLI. TODO: notes on setup and workflow.
+
+### Command Code
+
+[Command Code](https://commandcode.ai) is a terminal coding agent built around
+open models. I use the GOAT plan: $10/month for 30+ open and closed models,
+with up to $100 of monthly credits depending on the model. Usage is capped at
+$20 in any 5 hours, $50 in any 7 days, and $100 per month; cheaper models go a
+lot further inside those caps. Switch models with `/model`. The plan includes
+API access, so the same key works with any OpenAI- or Anthropic-compatible
+client at `https://api.commandcode.ai/provider/v1`, but the CLI is where the
+harness work pays off: tool-call repairs are free, and a high cache hit rate
+turns most of a request into cheap cache reads. Install with
+`npm i -g command-code` and run `cmd`.
 
 ## skills.sh and npx skills
 
