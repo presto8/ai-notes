@@ -71,6 +71,26 @@ TODO: notes on Hermes Agent setup, skills, and daily use.
 
 TODO: notes on OpenCode setup and workflow.
 
+OpenCode Go is OpenCode's own optional subscription for open coding models. I
+do not subscribe to it, so this is a note on what it offers rather than a
+recommendation from daily use. It is easy to confuse with OpenRouter, but they
+are different layers: OpenCode is an agent that runs tools in my repository,
+OpenRouter is a router that forwards requests to model providers, and OpenCode
+Go is a plan that gives the agent access to models. OpenRouter bills per token,
+with a processing fee on deposits. OpenCode Go is a flat monthly price, and its
+team negotiates bulk discounts and reserved GPU capacity, then passes the
+savings on as a larger monthly allowance rather than a lower per-token price.
+Go is $10/month, Go Plus is $40/month for higher limits, and Go Teams is
+$20 per member per month. One allowance covers every paid model, with a 5-hour
+window of 20% of it and a weekly window of 50% that resets on Monday. The plans
+cover tested models such as Kimi K3, GLM-5.3, DeepSeek V4.1 Flash, Qwen 3.8, and
+MiniMax M3, and the list changes as models come and go. Subscribe in the
+OpenCode Console, connect with `/connect`, and pick a model with the
+`opencode-go/` prefix. It is optional and there is no lock-in: OpenCode still
+works with any other provider. The plan also exposes an API at
+`https://opencode.ai/inference/go`, and other harnesses such as Claude Code,
+Codex, and Hermes can use it.
+
 ### Claude Code
 
 I use the Claude Code CLI. TODO: notes on setup, including the Foundry-backed
