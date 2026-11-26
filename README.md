@@ -16,6 +16,7 @@ Feedback, questions, comments, and improvements are welcome. Email me at
 
 - [Why I prefer CLI/TUI over desktop apps](#why-i-prefer-clitui-over-desktop-apps)
 - [cmux as my AI agent terminal](#cmux-as-my-ai-agent-terminal)
+- [Chat versus IDE versus agentic](#chat-versus-ide-versus-agentic)
 - [Agents I use](#agents-i-use)
   - [Hermes](#hermes)
   - [OpenCode](#opencode)
@@ -57,6 +58,33 @@ notes.
 cmux runs only on macOS. On Linux I am still looking for a replacement; see
 [docs/cmux.md](docs/cmux.md#linux) for the candidates. My older Herdr notes are
 in [docs/herdr.md](docs/herdr.md).
+
+## Chat versus IDE versus agentic
+
+Most of the AI coding tools in these notes fall into three modes, and the
+difference is how much of the loop the tool runs for me:
+
+- Chat. I paste or point at context, ask a question, and apply the answer
+  myself. The model does not read the repository or run commands. This is the
+  fastest way to get an explanation, a regex, a one-file function, or a second
+  opinion, and the slowest way to change a codebase. gptel in Emacs is where I
+  do most of this.
+- IDE. The editor suggests code as I type, or applies a scoped edit to the file
+  or selection in front of me. It sees more context than a chat window and
+  writes into the buffer directly, but a person still drives the sequence of
+  edits and decides when to run the tests. GitHub Copilot in Neovim is my IDE
+  layer.
+- Agentic. The agent gets tools: read files, search the tree, run commands,
+  edit code, run tests, and iterate on the result. The loop is the point. I
+  give it a goal and review the diff, and the usefulness depends on how well
+  the harness handles context, permissions, and sandboxing. The agents in
+  [Agents I use](#agents-i-use) are this mode.
+
+The lines blur. A chat tool can have tools, an IDE can run an agent, and an
+agent can be a chat partner when the task is small. The question I ask is not
+which label a tool has, but how much of the loop I want it to run: none, one
+file, or the whole change. I pick the smallest mode that can finish the task,
+because every step up in autonomy costs control and needs more review.
 
 ## Agents I use
 
