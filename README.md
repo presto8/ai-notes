@@ -355,6 +355,12 @@ license.
 
 Tools and ideas I want to look into, but have not tried yet:
 
+- Set up an egress proxy for agent workloads. Canary tokens give me detection,
+  but detection only tells me that a secret was used. An egress proxy is the
+  containment half: it refuses every outbound destination that is not on an
+  allowlist, and it keeps the real credential on the proxy side so the agent
+  only ever holds a placeholder. See
+  [Currently investigating](#currently-investigating) for the candidates.
 - [seshagy](https://github.com/lmilojevicc/seshagy). An agent-aware terminal
   dashboard that shows your project directories, active multiplexer sessions,
   and terminal-based coding agents in one view. It has native support for
