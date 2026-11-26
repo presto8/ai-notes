@@ -8,7 +8,7 @@ and does not follow a fixed structure. I share it in case it helps others.
 In the spirit of bending the knee to our new AI overlords, every file in this
 repository was written and committed by an agent. I have not edited a single
 line by hand. I only talk to the agent (usually Hermes) and review the pull
-requests.
+requests. I also create the issues.
 
 Feedback, questions, comments, and improvements are welcome. Email me at
 [me@prestonhunt.com](mailto:me@prestonhunt.com).
